@@ -13,20 +13,20 @@ class StubsService
 
     public function load(Template $template) :Stub
     {
-        $content = file_get_contents(__DIR__ . '/stubs/' . $template->stub());
+        $content = file_get_contents(__DIR__ . '/stubs/' . $template->stub);
 
         return new Stub($content);
     }
 
-    public function hydrate(Stub $stub, Template $template) :Stub
+    public function hydrate(Stub $stub, array $layers) :Stub
     {
-        $stub = $this->paintRollerService->brush($stub, $template->layers());
+        $stub = $this->paintRollerService->brush($stub, $layers);
         
         return $stub;
     } 
 
-    public function save(Stub $stub, Template $template)
+    public function save(Stub $stub, string $fullPath)
     {
-        file_put_contents($template->path(), $stub->getContent());
+        file_put_contents($fullPath, $stub->getContent());
     }
 }
