@@ -52,8 +52,24 @@ class StubsService
      */
     public function save(Stub $stub, string $fullPath)
     {
+        $this->prepareSavingFolder($fullPath);
+
         $fullPathWithExtension = StringParser::addFileExtension($fullPath);
 
         file_put_contents($fullPathWithExtension, $stub->getContent());
+    }
+
+    /**
+     * Prepare saving folder for stub
+     * @param  string $fullPath
+     * @return void
+     */
+    protected function prepareSavingFolder(string $fullPath)
+    {
+        if (is_dir($fullPath)) {
+            return;
+        }
+        
+        mkdir($fullPath, 0777, true);
     }
 }
