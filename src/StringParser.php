@@ -30,6 +30,11 @@ class StringParser
         return $fullPath . '.php';
     }
 
+    public static function startsWith(string $checkedString, string $expectedStart)
+    {
+        return strpos($checkedString, $expectedStart) === 0;
+    }
+
     public static function concatenateForPath(array $bits) :string
     {
         $bits = self::sanitizeConcatenate($bits);
@@ -41,7 +46,7 @@ class StringParser
     {
         $bits = self::sanitizeConcatenate($bits);
 
-        return implode('\'', $bits);
+        return implode('\\', $bits);
     }
 
     protected static function sanitizeConcatenate(array $bits) :array
