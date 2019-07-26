@@ -22,8 +22,13 @@ class StringParser
 
     public static function pascalCase(string $string) :string
     {
-        return $string;
+        return ucfirst($string);
     }  
+
+    public static function addFileExtension(string $fullPath) :string
+    {
+        return $fullPath . '.php';
+    }
 
     public static function concatenateForPath(array $bits) :string
     {

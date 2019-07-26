@@ -36,10 +36,11 @@ class Manager implements Template
      * @param string $name
      * @param array  $drivers
      */
-    public function __construct(string $name, array $drivers)
+    public function __construct(string $name, array $drivers, string $defaultDriver)
     {
         $this->name = $name;
         $this->drivers = $drivers;
+        $this->defaultDriver = $defaultDriver;
     }
 
     public function getName() :string
@@ -52,10 +53,9 @@ class Manager implements Template
     public function layers() :array
     {
         return [
-            new Layer('{{namespace}}', $this->getNamespace()),
             new Layer('{{class_name}}', $this->getName()),
             new Layer('{{drivers}}', $this->getDrivers()),
-            new Layer('{{default_driver}}', ''),
+            new Layer('{{default_driver}}', $this->defaultDriver),
         ];
     }
 

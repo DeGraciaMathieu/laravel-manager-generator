@@ -27,6 +27,8 @@ class StubsService
 
     public function save(Stub $stub, string $fullPath)
     {
-        file_put_contents($fullPath, $stub->getContent());
+        $fullPathWithExtension = StringParser::addFileExtension($fullPath);
+
+        file_put_contents($fullPathWithExtension, $stub->getContent());
     }
 }
