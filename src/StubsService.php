@@ -46,30 +46,45 @@ class StubsService
 
     /**
      * [save description]
-     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub
-     * @param  string $fullPath [description]
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub $stub
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\File $file
      * @return void
      */
-    public function save(Stub $stub, string $fullPath)
+    public function save(Stub $stub, File $file)
     {
-        $this->prepareSavingFolder($fullPath);
+        $this->prepareSavingFolder($file);
 
-        $fullPathWithExtension = StringParser::addFileExtension($fullPath);
+        $fullPathWithExtension = $this->getFullPathWithExtension($file);
 
         file_put_contents($fullPathWithExtension, $stub->getContent());
     }
 
     /**
      * Prepare saving folder for stub
-     * @param  string $fullPath
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\File $file
      * @return void
      */
-    protected function prepareSavingFolder(string $fullPath)
+    protected function prepareSavingFolder(File $file)
     {
-        if (is_dir($fullPath)) {
+        if (is_dir($file->path)) {
             return;
         }
         
-        mkdir($fullPath, 0777, true);
+        mkdir($file->path, 0777, true);
+    }
+
+    /**
+     * Get full path with extension from file 
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\File $file
+     * @return string
+     */
+    protected function getFullPathWithExtension(File $file)
+    {
+        $fullPath = StringParser::concatenateForPath([
+            $file->path,
+            $file->name,
+        ]);
+
+        return StringParser::addFileExtension($fullPath);
     }
 }

@@ -47,14 +47,14 @@ class Crucible
     {
         $stub = $this->forge($template);
 
-        $fullPath = $this->getFullPath($template);
+        $file = $this->prepareFile($template);
 
-        $this->stubsService->save($stub, $fullPath);
+        $this->stubsService->save($stub, $file);
     }
 
     /**
-     * Create a template and save this
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template   $template
+     * Create a template
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
      * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
      */
     protected function forge(Template $template) :Stub
@@ -63,14 +63,30 @@ class Crucible
         
         $stub = $this->stubsService->hydrate($stub, $template->layers());
 
-        if (isset($template->namespace)) {
+        if ($this->needNamespace($template)) {
             $this->hydrateNamespaceLayer($stub, $template);
         }
 
         return $stub;
     }
 
-    protected function hydrateNamespaceLayer($stub, $template)
+    /**
+     * Check if template need namespace
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
+     * @return boolean
+     */
+    protected function needNamespace(Template $template)
+    {
+        return ! StringParser::startsWith($template->stub, 'subset');
+    }
+
+    /**
+     * Hydrate namespace
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Stub $stub
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     */
+    protected function hydrateNamespaceLayer(Stub $stub, Template $template) :Stub
     {
         $layers = $this->getNamespaceLayer($template);
 
@@ -81,7 +97,7 @@ class Crucible
 
     /**
      * Get a layers list to manage namespaces
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template   $template
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
      * @return array
      */
     protected function getNamespaceLayer(Template $template) :array
@@ -96,31 +112,24 @@ class Crucible
         ];
     }    
 
-    /**
-     * Get full template path
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template   $template
-     * @return string
-     */
-    protected function getFullPath(Template $template) :string
+    protected function prepareFile(Template $template)
     {
+        $name = $template->getName();
         $path = $this->getPath($template);
 
-        return StringParser::concatenateForPath([
-            $path,
-            $template->path,
-        ]);
+        return new File($name, $path);
     }
 
     /**
      * Get template path
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template   $template
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
      * @return string
      */
     protected function getPath(Template $template) :string
     {
         return StringParser::concatenateForPath([
             $this->parameters->getBasePath(),
-            $template->getName(),
+            $template->path,
         ]);        
     }     
 }
