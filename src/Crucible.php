@@ -2,7 +2,9 @@
 
 namespace DeGraciaMathieu\LaravelManagerGenerator;
 
-use DeGraciaMathieu\LaravelManagerGenerator\StubsService;
+use DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub;
+use DeGraciaMathieu\LaravelManagerGenerator\Stub\StubsService;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
 class Crucible
@@ -13,7 +15,7 @@ class Crucible
     protected $parameters;
 
     /**
-     * @var \DeGraciaMathieu\LaravelManagerGenerator\StubsService
+     * @var \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub\StubsService
      */
     protected $stubsService;
 
@@ -29,7 +31,7 @@ class Crucible
     /**
      * Makes template without saving
      * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
-     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      */
     public function make(Template $template) :Stub
     {
@@ -55,7 +57,7 @@ class Crucible
     /**
      * Create a template
      * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
-     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      */
     protected function forge(Template $template) :Stub
     {
@@ -82,9 +84,9 @@ class Crucible
 
     /**
      * Hydrate namespace
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Stub $stub
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub $stub
      * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
-     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      */
     protected function hydrateNamespaceLayer(Stub $stub, Template $template) :Stub
     {
@@ -104,7 +106,7 @@ class Crucible
     {
         $namespace = StringParser::concatenateForNamespace([
             $this->parameters->getBaseNamespace(),
-            $template->namespace,
+            $template->getNamespace(),
         ]);
 
         return [

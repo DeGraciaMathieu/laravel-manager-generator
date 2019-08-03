@@ -1,11 +1,11 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator;
+namespace DeGraciaMathieu\LaravelManagerGenerator\PaintRoller;
 
 class Layer
 {
-    protected $identifier;
-    protected $value;
+    public $identifier;
+    public $value;
 
     public function __construct(string $identifier, string $value)
     {

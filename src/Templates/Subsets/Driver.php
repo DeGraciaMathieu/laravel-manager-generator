@@ -2,8 +2,8 @@
 
 namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Subsets;
 
-use DeGraciaMathieu\LaravelManagerGenerator\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\StringParser;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
 class Driver implements Template

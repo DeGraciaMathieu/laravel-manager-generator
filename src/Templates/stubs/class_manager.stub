@@ -1,0 +1,28 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Support\Manager;
+
+class {{class_name}} extends Manager
+{{{drivers}}
+    /**
+     * Return Driver
+     * @param \App\Managers\OrderApi\Contracts\DriverContract $driver
+     * @return \App\Managers\OrderApi\Repository
+     */
+    public function getRepository(DriverContract $driver)
+    {
+        return new Repository($driver);
+    }
+
+    /**
+     * Get the default driver name.
+     *
+     * @return string
+     */
+    public function getDefaultDriver()
+    {
+        return $this->app['config']['{{default_driver}}']['driver'];
+    }
+}

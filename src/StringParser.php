@@ -15,6 +15,11 @@ class StringParser
         return $string;
     }
 
+    public static function sanitize(string $string) :string
+    {
+        return preg_replace('/[^\p{L}\p{N}\s]/u', '', $string);
+    }
+
     public static function snakeCase(string $string) :string
     {
         return $string;
@@ -39,7 +44,7 @@ class StringParser
     {
         $bits = self::sanitizeConcatenate($bits);
 
-        return implode('/', $bits);
+        return implode('\\', $bits);
     }
 
     public static function concatenateForNamespace(array $bits) :string

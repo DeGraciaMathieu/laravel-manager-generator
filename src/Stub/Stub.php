@@ -1,6 +1,6 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator;
+namespace DeGraciaMathieu\LaravelManagerGenerator\Stub;
 
 class Stub
 {

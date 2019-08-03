@@ -1,0 +1,24 @@
+<?php
+
+namespace {{namespace}};
+
+class {{class_name}}
+{
+    /**
+     * @var \App\Managers\CsrDecoder\Contracts\DriverContract
+     */
+    protected $driver;
+
+    public function __construct(Contracts\Driver $driver)
+    {
+        $this->driver = $driver;
+    }
+
+    /**
+     * something...
+     */
+    public function foo()
+    {
+        return $this->driver->foo();
+    }  
+}

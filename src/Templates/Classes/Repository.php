@@ -1,8 +1,8 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Contracts;
+namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Classes;
 
-use DeGraciaMathieu\LaravelManagerGenerator\Layer;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
 class Repository implements Template
@@ -29,15 +29,7 @@ class Repository implements Template
      * @inheritdoc
      * @var string $path
      */
-    public $path = 'Contracts';
-
-    /**
-     * @param array $name
-     */
-    public function __construct(array $name)
-    {
-        $this->name = $name;
-    }
+    public $path = null;
 
     /**
      * Get template name.
@@ -45,9 +37,7 @@ class Repository implements Template
      */
     public function getName() :string
     {
-        $name = $this->name . $this->sufixName;
-
-        return StringParser::pascalCase($name);
+        return 'Repository';
     }
 
     /**

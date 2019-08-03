@@ -1,8 +1,11 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator;
+namespace DeGraciaMathieu\LaravelManagerGenerator\Stub;
 
+use DeGraciaMathieu\LaravelManagerGenerator\File;
+use DeGraciaMathieu\LaravelManagerGenerator\StringParser;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\PaintRollerService;
 
 class StubsService
 {
@@ -22,20 +25,20 @@ class StubsService
     /**
      * Load a stub from a template
      * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template
-     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      */
     public function load(Template $template) :Stub
     {
-        $content = file_get_contents(__DIR__ . '/stubs/' . $template->stub);
+        $content = file_get_contents(__DIR__ . '/../Templates/stubs/' . $template->stub);
 
         return new Stub($content);
     }
 
     /**
      * Hydrate stub with layers
-     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      * @param  array  $layers
-     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub
      */
     public function hydrate(Stub $stub, array $layers) :Stub
     {
@@ -46,7 +49,7 @@ class StubsService
 
     /**
      * [save description]
-     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub $stub
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub $stub
      * @param \DeGraciaMathieu\LaravelManagerGenerator\File $file
      * @return void
      */

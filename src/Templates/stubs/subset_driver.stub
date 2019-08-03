@@ -1,0 +1,12 @@
+   
+    /**
+     * Create Integration driver for manager
+     */
+    public function create{{function_name}}Driver()
+    {
+        $config = $this->app['config']['{{array_key_name}}'];
+
+        $driver = new Drivers\{{class_name}}($config);
+
+        return $this->getRepository($driver);
+    }

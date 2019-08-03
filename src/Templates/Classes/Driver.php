@@ -1,11 +1,12 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Contracts;
+namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Classes;
 
-use DeGraciaMathieu\LaravelManagerGenerator\Layer;
+use DeGraciaMathieu\LaravelManagerGenerator\StringParser;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
-class Repository implements Template
+class Driver implements Template
 {
     /**
      * @inheritdoc
@@ -34,7 +35,7 @@ class Repository implements Template
     /**
      * @param array $name
      */
-    public function __construct(array $name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }

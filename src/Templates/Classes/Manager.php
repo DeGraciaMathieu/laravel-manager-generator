@@ -2,8 +2,8 @@
 
 namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Classes;
 
-use DeGraciaMathieu\LaravelManagerGenerator\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\StringParser;
+use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
 class Manager implements Template
@@ -59,14 +59,13 @@ class Manager implements Template
         ];
     }
 
-    protected function getNamespace()
+    public function getNamespace()
     {
-        return $this->name . 'Manager';
+        return StringParser::pascalCase($this->name) . 'Manager';
     }
 
     protected function getDrivers()
     {
-
         $content = null;
 
         foreach ($this->drivers as $stub) {

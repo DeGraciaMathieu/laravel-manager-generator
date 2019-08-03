@@ -1,6 +1,8 @@
 <?php
 
-namespace DeGraciaMathieu\LaravelManagerGenerator;
+namespace DeGraciaMathieu\LaravelManagerGenerator\PaintRoller;
+
+use DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub;
 
 class PaintRollerService 
 {
