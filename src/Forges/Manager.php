@@ -9,11 +9,20 @@ use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Forge;
 
 class Manager implements Forge
 {
+    /**
+     * it's just the constructor
+     * @param \DeGraciaMathieu\LaravelManagerGenerator\Crucible $crucible
+     */    
     public function __construct(Crucible $crucible)
     {
         $this->crucible = $crucible;
     }
 
+    /**
+     * Forge a template manager
+     * @param  array  $parameters
+     * @return void
+     */
     public function forge(array $parameters)
     {
         list($driverSubsets, $defaultDriver) = $this->prepareDrivers($parameters);
@@ -21,6 +30,11 @@ class Manager implements Forge
         $this->crucible->create(new Templates\Classes\Manager($parameters['name'], $driverSubsets, $defaultDriver));
     }
 
+    /**
+     * Prepares drivers subsets and default driver 
+     * @param  array  $parameters [description]
+     * @return [type]             [description]
+     */
     protected function prepareDrivers(array $parameters) :array
     {
         $drivers = explode(',', $parameters['drivers']);
@@ -31,6 +45,11 @@ class Manager implements Forge
         ];
     }
 
+    /**
+     * Prepares the drivers subsets of a manager
+     * @param  array  $drivers [description]
+     * @return array
+     */
     protected function prepareDriverSubsets(array $drivers) :array
     {
         return array_map(function($driver) {
@@ -42,6 +61,12 @@ class Manager implements Forge
         }, $drivers);
     }
 
+    /**
+     * Just read the method name
+     * @param  array  $drivers
+     * @param  array  $parameters
+     * @return string
+     */
     protected function getDefaultDriver(array $drivers, array $parameters) :string
     {
         return $parameters['default_driver'] ? $parameters['default_driver'] : $drivers[0];

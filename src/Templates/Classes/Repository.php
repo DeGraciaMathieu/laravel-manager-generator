@@ -40,6 +40,11 @@ class Repository implements Template
         return 'Repository';
     }
 
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
     /**
      * Returns the list of layers.
      * @return array

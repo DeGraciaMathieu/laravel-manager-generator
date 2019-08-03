@@ -20,6 +20,7 @@ class Crucible
     protected $stubsService;
 
     /**
+     * it's just the constructor
      * @param \DeGraciaMathieu\LaravelManagerGenerator\Parameters $parameters
      */
     public function __construct(Parameters $parameters)

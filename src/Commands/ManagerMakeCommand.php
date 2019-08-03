@@ -51,6 +51,10 @@ class ManagerMakeCommand extends Command
         $this->createRepository($crucible);
     }
 
+    /**
+     * Get common parameters
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\Parameters
+     */
     protected function getParameters() :Parameters
     {
         $basePath = StringParser::concatenateForPath([

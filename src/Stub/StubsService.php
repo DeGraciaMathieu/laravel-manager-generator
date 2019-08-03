@@ -69,11 +69,11 @@ class StubsService
      */
     protected function prepareSavingFolder(File $file)
     {
-        if (is_dir($file->path)) {
+        if (is_dir($file->getPath())) {
             return;
         }
         
-        mkdir($file->path, 0777, true);
+        mkdir($file->getPath(), 0777, true);
     }
 
     /**
@@ -84,8 +84,8 @@ class StubsService
     protected function getFullPathWithExtension(File $file)
     {
         $fullPath = StringParser::concatenateForPath([
-            $file->path,
-            $file->name,
+            $file->getPath(),
+            $file->getName(),
         ]);
 
         return StringParser::addFileExtension($fullPath);

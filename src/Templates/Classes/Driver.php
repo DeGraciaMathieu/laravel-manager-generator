@@ -33,6 +33,7 @@ class Driver implements Template
     public $path = 'Drivers';
 
     /**
+     * it's just the constructor
      * @param array $name
      */
     public function __construct(string $name)
@@ -47,6 +48,11 @@ class Driver implements Template
     public function getName() :string
     {
         return StringParser::pascalCase($this->name);
+    }
+
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     /**

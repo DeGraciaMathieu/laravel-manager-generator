@@ -33,6 +33,7 @@ class Manager implements Template
     public $path = null;
 
     /**
+     * it's just the constructor
      * @param string $name
      * @param array  $drivers
      */

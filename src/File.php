@@ -15,6 +15,7 @@ class File
     public $path;
 
     /**
+     * it's just the constructor
      * @param string $name
      * @param string $path
      */
@@ -23,4 +24,14 @@ class File
         $this->name = $name;
         $this->path = $path;
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
+    }    
 }
