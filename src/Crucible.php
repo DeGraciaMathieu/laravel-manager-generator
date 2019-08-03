@@ -115,7 +115,12 @@ class Crucible
         ];
     }    
 
-    protected function prepareFile(Template $template)
+    /**
+     * Prepares file from template
+     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template $template
+     * @return \DeGraciaMathieu\LaravelManagerGenerator\File
+     */
+    protected function prepareFile(Template $template) :File
     {
         $name = $template->getName();
         $path = $this->getPath($template);

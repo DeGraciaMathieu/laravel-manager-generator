@@ -9,25 +9,21 @@ use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 class Driver implements Template
 {
     /**
-     * @inheritdoc
      * @var string $namespace
      */
     public $namespace = 'Drivers';
 
     /**
-     * @inheritdoc
      * @var string $sufixName
      */
     public $sufixName = null;
 
     /**
-     * @inheritdoc
      * @var string $stub
      */
     public $stub = 'class_driver.stub';
 
     /**
-     * @inheritdoc
      * @var string $path
      */
     public $path = 'Drivers';
@@ -50,7 +46,10 @@ class Driver implements Template
         return StringParser::pascalCase($this->name);
     }
 
-    public function getNamespace()
+    /**
+     * @inheritdoc
+     */
+    public function getNamespace() :string
     {
         return $this->namespace;
     }
@@ -59,7 +58,7 @@ class Driver implements Template
      * Returns the list of layers.
      * @return array
      */
-    public function layers()
+    public function layers() :array
     {
         return [
             new Layer('{{class_name}}', $this->getName()),

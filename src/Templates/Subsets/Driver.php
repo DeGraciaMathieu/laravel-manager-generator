@@ -8,13 +8,39 @@ use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
 class Driver implements Template
 {
+    /**
+     * @var string $stub
+     */    
     public $stub = 'subset_driver.stub';
 
+    /**
+     * it's just the constructor
+     * @param array $name
+     */
     public function __construct(string $name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getName() :string
+    {
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getNamespace() :string
+    {
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function layers() :array
     {
         return [

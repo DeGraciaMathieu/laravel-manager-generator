@@ -8,48 +8,45 @@ use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 class Repository implements Template
 {
     /**
-     * @inheritdoc
      * @var string $namespace
      */
     public $namespace = 'Contracts';
 
     /**
-     * @inheritdoc
      * @var string $sufixName
      */
     public $sufixName = null;
 
     /**
-     * @inheritdoc
      * @var string $stub
      */
     public $stub = 'class_repository.stub';
 
     /**
-     * @inheritdoc
      * @var string $path
      */
     public $path = null;
 
     /**
-     * Get template name.
-     * @return string
+     * @inheritdoc
      */
     public function getName() :string
     {
         return 'Repository';
     }
 
-    public function getNamespace()
+    /**
+     * @inheritdoc
+     */
+    public function getNamespace() :string
     {
         return $this->namespace;
     }
 
     /**
-     * Returns the list of layers.
-     * @return array
+     * @inheritdoc
      */
-    public function layers()
+    public function layers() :array
     {
         return [
             new Layer('{{class_name}}', $this->getName()),

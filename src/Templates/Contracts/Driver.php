@@ -5,7 +5,7 @@ namespace DeGraciaMathieu\LaravelManagerGenerator\Templates\Contracts;
 use DeGraciaMathieu\LaravelManagerGenerator\PaintRoller\Layer;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 
-class Driver implements Template
+class Driverqsdsqsq implements Template
 {
     protected $properties = [
         'namespace' => '\Contracts',

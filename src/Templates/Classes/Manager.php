@@ -9,19 +9,16 @@ use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Template;
 class Manager implements Template
 {
     /**
-     * @inheritdoc
      * @var string $namespace
      */
     public $namespace = null;
 
     /**
-     * @inheritdoc
      * @var string $sufixName
      */
     public $sufixName = 'Manager';
 
     /**
-     * @inheritdoc
      * @var string $stub
      */
     public $stub = 'class_manager.stub';
@@ -36,6 +33,7 @@ class Manager implements Template
      * it's just the constructor
      * @param string $name
      * @param array  $drivers
+     * @param string  $defaultDriver
      */
     public function __construct(string $name, array $drivers, string $defaultDriver)
     {
@@ -44,6 +42,9 @@ class Manager implements Template
         $this->defaultDriver = $defaultDriver;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getName() :string
     {
         $name = $this->name . $this->sufixName;
@@ -51,6 +52,17 @@ class Manager implements Template
         return StringParser::pascalCase($name);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getNamespace() :string
+    {
+        return StringParser::pascalCase($this->name) . 'Manager';
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function layers() :array
     {
         return [
@@ -60,12 +72,11 @@ class Manager implements Template
         ];
     }
 
-    public function getNamespace()
-    {
-        return StringParser::pascalCase($this->name) . 'Manager';
-    }
-
-    protected function getDrivers()
+    /**
+     * Merge drivers content
+     * @return string
+     */
+    protected function getDrivers() :string
     {
         $content = null;
 

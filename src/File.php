@@ -25,12 +25,18 @@ class File
         $this->path = $path;
     }
 
-    public function getName()
+    /**
+     * @return string
+     */
+    public function getName() :string
     {
         return $this->name;
     }
 
-    public function getPath()
+    /**
+     * @return string
+     */
+    public function getPath() :string
     {
         return $this->path;
     }    
