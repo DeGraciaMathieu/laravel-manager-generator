@@ -20,14 +20,13 @@ class Manager implements Forge
 
     /**
      * Forge a template manager
-     * @param  array  $parameters
      * @return void
      */
-    public function forge(array $parameters)
+    public function forge()
     {
-        list($driverSubsets, $defaultDriver) = $this->prepareDrivers($parameters);
+        list($driverSubsets, $defaultDriver) = $this->prepareDrivers();
 
-        $this->crucible->create(new Templates\Classes\Manager($parameters['name'], $driverSubsets, $defaultDriver));
+        $this->crucible->create(new Templates\Classes\Manager($this->crucible->parameters->getName(), $driverSubsets, $defaultDriver));
     }
 
     /**
@@ -35,22 +34,19 @@ class Manager implements Forge
      * @param  array  $parameters [description]
      * @return [type]             [description]
      */
-    protected function prepareDrivers(array $parameters) :array
+    protected function prepareDrivers() :array
     {
-        $drivers = explode(',', $parameters['drivers']);
-
         return [
-            $this->prepareDriverSubsets($drivers),
-            $this->getDefaultDriver($drivers, $parameters),
+            $this->prepareDriverSubsets(),
+            $this->getDefaultDriver(),
         ];
     }
 
     /**
      * Prepares the drivers subsets of a manager
-     * @param  array  $drivers [description]
      * @return array
      */
-    protected function prepareDriverSubsets(array $drivers) :array
+    protected function prepareDriverSubsets() :array
     {
         return array_map(function($driver) {
 
@@ -58,17 +54,18 @@ class Manager implements Forge
 
             return $this->crucible->make(new Templates\Subsets\Driver($driver));
 
-        }, $drivers);
+        }, $this->crucible->parameters->getDrivers());
     }
 
     /**
      * Just read the method name
      * @param  array  $drivers
-     * @param  array  $parameters
      * @return string
      */
-    protected function getDefaultDriver(array $drivers, array $parameters) :string
+    protected function getDefaultDriver() :string
     {
-        return $parameters['default_driver'] ? $parameters['default_driver'] : $drivers[0];
+        return $this->crucible->parameters->hasDefaultDriver() 
+            ? $this->crucible->parameters->getDefaultDriver() 
+            : $this->crucible->parameters->getFirstDriver();
     }
 }

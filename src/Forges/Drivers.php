@@ -23,16 +23,14 @@ class Drivers implements Forge
      * @param  array  $parameters
      * @return void
      */
-    public function forge(array $parameters)
+    public function forge()
     {
-        $drivers = explode(',', $parameters['drivers']);
-
         array_map(function($driver) {
 
             $driver = StringParser::sanitize($driver);
 
             $this->crucible->create(new Templates\Classes\Driver($driver));
 
-        }, $drivers);
+        }, $this->crucible->parameters->getDrivers());
     }
 }

@@ -22,7 +22,7 @@ class Repository implements Forge
      * @param  array  $parameters
      * @return void
      */
-    public function forge(array $parameters)
+    public function forge()
     {
         $this->crucible->create(new Templates\Classes\Repository());
     }

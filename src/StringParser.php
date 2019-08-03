@@ -22,12 +22,12 @@ class StringParser
 
     public static function snakeCase(string $string) :string
     {
-        return $string;
+        return trim($string);
     }
 
     public static function pascalCase(string $string) :string
     {
-        return ucfirst($string);
+        return ucfirst(trim($string));
     }  
 
     public static function addFileExtension(string $fullPath) :string

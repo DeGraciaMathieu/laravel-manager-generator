@@ -5,7 +5,6 @@ namespace {{namespace}};
 class {{class_name}}
 {
     /**
-     * @var \App\Managers\CsrDecoder\Contracts\DriverContract
      */
     protected $driver;
 

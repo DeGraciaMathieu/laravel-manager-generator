@@ -16,7 +16,7 @@ class ManagerMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:manager {name} {--drivers=} {--default_driver=}';
+    protected $signature = 'make:manager';
 
     /**
      * The console command description.
@@ -42,71 +42,43 @@ class ManagerMakeCommand extends Command
      */
     public function handle()
     {
-        $parameters = $this->getParameters();
+        $name = $this->ask('What is your manager name ?');
+        $drivers = $this->ask('Vrite your drivers names separated by a space (ex:local mock foo)');
+        $defaultDriver = $this->choice('What is your default driver ?', explode(' ', $drivers));
+
+        $this->creationIsAnActOfSheerWill($name, $drivers, $defaultDriver);
+
+        $this->info('Manager successfully created !');
+    }
+
+    protected function creationIsAnActOfSheerWill(string $name, string $drivers, string $defaultDriver)
+    {
+        $parameters = $this->getParameters($name, $drivers, $defaultDriver);
 
         $crucible = new Crucible($parameters);
 
-        $this->createManager($crucible);
-        $this->createDrivers($crucible);
-        $this->createRepository($crucible);
+        (new Forges\Manager($crucible))->forge();
+        (new Forges\Drivers($crucible))->forge();
+        (new Forges\Repository($crucible))->forge();
     }
 
     /**
      * Get common parameters
      * @return \DeGraciaMathieu\LaravelManagerGenerator\Parameters
      */
-    protected function getParameters() :Parameters
+    protected function getParameters(string $name, string $drivers, string $defaultDriver) :Parameters
     {
         $basePath = StringParser::concatenateForPath([
             config('manager_generator.base_path'),
-            StringParser::pascalCase($this->argument('name')),
+            StringParser::pascalCase($name),
         ]);
 
         return new Parameters([
+            'name' => $name,
+            'drivers' => $drivers,
+            'default_driver' => $defaultDriver,
             'base_path' => $basePath,
             'base_namespace' => config('manager_generator.base_namespace'),
         ]);
     }
-
-    /**
-     * Create manager file
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Crucible $crucible
-     * @return void
-     */
-    protected function createManager(Crucible $crucible) :void
-    {
-        $parameters = [
-            'name' => $this->argument('name'),
-            'drivers' => $this->option('drivers'),
-            'default_driver' => $this->option('default_driver'),
-        ];
-
-        (new Forges\Manager($crucible))->forge($parameters);
-    }
-
-    /**
-     * Create drivers files
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Crucible $crucible
-     * @return void
-     */
-    protected function createDrivers(Crucible $crucible) :void
-    {
-        $parameters = [
-            'drivers' => $this->option('drivers'),
-        ];
-
-        (new Forges\Drivers($crucible))->forge($parameters);
-    }
-
-    /**
-     * Create repository file
-     * @param  \DeGraciaMathieu\LaravelManagerGenerator\Crucible $crucible
-     * @return void
-     */
-    protected function createRepository(Crucible $crucible) :void
-    {
-        $parameters = [];
-
-        (new Forges\Repository($crucible))->forge($parameters);
-    } 
 }

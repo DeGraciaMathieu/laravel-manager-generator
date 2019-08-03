@@ -18,6 +18,35 @@ class Parameters
         $this->properties = $properties;
     }
 
+    public function getName()
+    {
+        return $this->properties['name'] ?: null;
+    }
+
+    public function getDrivers()
+    {
+        return explode(' ', $this->properties['drivers']);
+    }    
+
+    public function hasDefaultDriver()
+    {
+        if (! $this->getDefaultDriver()) {
+            return null;
+        }
+
+        return $this->properties['default_driver'];
+    }
+
+    public function getDefaultDriver()
+    {
+        return $this->properties['default_driver'];
+    }
+
+    public function getFirstDriver()
+    {
+        return $this->getDefaultDriver()[0];
+    }
+
     /**
      * @return mixed
      */

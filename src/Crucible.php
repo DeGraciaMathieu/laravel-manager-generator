@@ -12,7 +12,7 @@ class Crucible
     /**
      * @var \DeGraciaMathieu\LaravelManagerGenerator\Parameters
      */
-    protected $parameters;
+    public $parameters;
 
     /**
      * @var \DeGraciaMathieu\LaravelManagerGenerator\Stub\Stub\StubsService

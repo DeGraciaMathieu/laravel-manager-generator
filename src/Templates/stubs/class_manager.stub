@@ -7,9 +7,9 @@ use Illuminate\Support\Manager;
 class {{class_name}} extends Manager
 {{{drivers}}
     /**
-     * Return Driver
-     * @param \App\Managers\OrderApi\Contracts\DriverContract $driver
-     * @return \App\Managers\OrderApi\Repository
+     * [getRepository description]
+     * @param  {[type]} DriverContract $driver       [description]
+     * @return {[type]}                [description]
      */
     public function getRepository(DriverContract $driver)
     {
