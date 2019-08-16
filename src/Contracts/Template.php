@@ -14,7 +14,7 @@ interface Template
      * Get template namespace.
      * @return string
      */
-    public function getNamespace() :string;
+    public function getNamespace() :?string;
 
     /**
      * Returns the list of layers.

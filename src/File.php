@@ -7,12 +7,12 @@ class File
     /**
      * @var string
      */
-    public $name;
+    public $name = null;
 
     /**
      * @var string
      */
-    public $path;
+    public $path = null;
 
     /**
      * it's just the constructor

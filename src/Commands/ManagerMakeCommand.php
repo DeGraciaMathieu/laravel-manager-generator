@@ -40,10 +40,10 @@ class ManagerMakeCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle() :void
     {
         $name = $this->ask('What is your manager name ?');
-        $drivers = $this->ask('Vrite your drivers names separated by a space (ex:local mock foo)');
+        $drivers = $this->ask('Vrite your drivers name separated by a space (ex:local mock foo)');
         $defaultDriver = $this->choice('What is your default driver ?', explode(' ', $drivers));
 
         $this->creationIsAnActOfSheerWill($name, $drivers, $defaultDriver);
@@ -51,7 +51,14 @@ class ManagerMakeCommand extends Command
         $this->info('Manager successfully created !');
     }
 
-    protected function creationIsAnActOfSheerWill(string $name, string $drivers, string $defaultDriver)
+    /**
+     * Make manager with all files
+     * @param  string $name
+     * @param  string $drivers
+     * @param  string $defaultDriver
+     * @return void
+     */
+    protected function creationIsAnActOfSheerWill(string $name, string $drivers, string $defaultDriver) :void
     {
         $parameters = $this->getParameters($name, $drivers, $defaultDriver);
 
@@ -60,6 +67,7 @@ class ManagerMakeCommand extends Command
         (new Forges\Manager($crucible))->forge();
         (new Forges\Drivers($crucible))->forge();
         (new Forges\Repository($crucible))->forge();
+        (new Forges\Contracts($crucible))->forge();
     }
 
     /**

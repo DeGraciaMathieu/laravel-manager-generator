@@ -44,7 +44,9 @@ class Parameters
 
     public function getFirstDriver()
     {
-        return $this->getDefaultDriver()[0];
+        $drivers = $this->getDrivers();
+
+        return $drivers[0];
     }
 
     /**

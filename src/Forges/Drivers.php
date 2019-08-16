@@ -29,7 +29,7 @@ class Drivers implements Forge
 
             $driver = StringParser::sanitize($driver);
 
-            $this->crucible->create(new Templates\Classes\Driver($driver));
+            $this->crucible->create(new Templates\DriverClass($driver));
 
         }, $this->crucible->parameters->getDrivers());
     }

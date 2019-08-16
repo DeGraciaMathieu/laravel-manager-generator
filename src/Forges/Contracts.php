@@ -6,7 +6,7 @@ use DeGraciaMathieu\LaravelManagerGenerator\Crucible;
 use DeGraciaMathieu\LaravelManagerGenerator\Templates;
 use DeGraciaMathieu\LaravelManagerGenerator\Contracts\Forge;
 
-class Repository implements Forge
+class Contracts implements Forge
 {
     /**
      * it's just the constructor
@@ -24,6 +24,6 @@ class Repository implements Forge
      */
     public function forge()
     {
-        $this->crucible->create(new Templates\RepositoryClass($this->crucible->parameters->getName()));
+        $this->crucible->create(new Templates\DriverContract('Driver'));
     }
 }

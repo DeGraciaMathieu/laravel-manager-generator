@@ -26,7 +26,7 @@ class Manager implements Forge
     {
         list($driverSubsets, $defaultDriver) = $this->prepareDrivers();
 
-        $this->crucible->create(new Templates\Classes\Manager($this->crucible->parameters->getName(), $driverSubsets, $defaultDriver));
+        $this->crucible->create(new Templates\ManagerClass($this->crucible->parameters->getName(), $driverSubsets, $defaultDriver));
     }
 
     /**
@@ -52,7 +52,7 @@ class Manager implements Forge
 
             $driver = StringParser::sanitize($driver);
 
-            return $this->crucible->make(new Templates\Subsets\Driver($driver));
+            return $this->crucible->make(new Templates\DriverSubset($driver));
 
         }, $this->crucible->parameters->getDrivers());
     }
